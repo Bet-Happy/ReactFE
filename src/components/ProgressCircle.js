@@ -9,17 +9,17 @@ class ProgressCircle extends React.Component {
     }
 
     componentDidMount() {
-        let sec = 10;
+        let sec = 5;
         setInterval(
             () => {
-                if (this.state.value > 100) {
-                    //console.log(this.state.value)
+                if (this.state.value >= 100) {
+                    console.log(this.state.value)
                     this.setState({ value: 0 });
                 } else {
-                    this.setState({ value: this.state.value++ })
+                    this.setState({ value: this.state.value + 1 })
                 }
             },
-            100
+            10 * (sec - 0.5)
         );
 
     }
@@ -31,7 +31,7 @@ class ProgressCircle extends React.Component {
                     <div className="card-header">Activity: {this.props.skillName}</div>
                     <div className="card-body">
                         <div style={{ width: 100, height: 100 }}>
-                            <CircularProgressbar value={this.state.value} maxValue={100} text={`${this.state.value}%`} styles={buildStyles({ pathTransition: this.state.value === 0 ? "none" : "stroke-dashoffset 0.5s ease 0s" })} />
+                            <CircularProgressbar value={this.state.value} maxValue={100} text={`${this.state.value}%`} styles={buildStyles({ pathTransition: this.state.value === 0 ? "none" : "stroke-dashoffset 10% ease 0s" })} />
                         </div>
                         <div className="card-title">progress circle</div>
                         <div className="card-text">
