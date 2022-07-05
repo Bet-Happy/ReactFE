@@ -1,24 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import ProgressCircle from './components/ProgressCircle';
+import SkillsCard from './components/SkillsCard';
+import VerticalNavs from './components/VerticalNavs';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lg-2 col-md-3 col-sm-4 flex-column py-3 px-auto text-white bg-dark">
+            <VerticalNavs />
+          </div>
+          <div className="col-lg-10 col-md-9 col-sm-8">
+            <div className="row my-5">
+              <ProgressCircle activeSkill="Mining" />
+            </div>
+            <div className='row d-flex justify-content-around'>
+              <SkillsCard skillName="Mining" />
+              <SkillsCard skillName="Smithing" />
+              <SkillsCard skillName="Woodcutting" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div >
   );
 }
 
