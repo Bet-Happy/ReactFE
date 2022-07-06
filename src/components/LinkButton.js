@@ -1,11 +1,19 @@
-import {useRef, useEffect} from 'react';
+import { useRef, useEffect } from 'react';
 
-const LinkButton = () => {
+const LinkButton = (props) => {
   const ref = useRef(null);
 
+
   useEffect(() => {
-    const handleClick = event => {
-      console.log('Button clicked');
+    const handleClick = () => {
+      console.log("link button")
+      console.log(props.active)
+      if (props.active) {
+        props.endProgress()
+      } else {
+        props.startProgress()
+      }
+
     };
 
     const element = ref.current;

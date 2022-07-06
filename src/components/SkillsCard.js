@@ -12,7 +12,7 @@ function SkillsCard(props) {
           <div className="card-text">
             Description.
           </div>
-          <LinkButton/>
+          <LinkButton startProgress={props.startProgress} endProgress={props.endProgress} active={props.active} />
         </div>
       </div >
     </>
