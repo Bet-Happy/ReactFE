@@ -1,4 +1,5 @@
 import React from 'react';
+import LinkButton from './LinkButton';
 
 
 function SkillsCard(props) {
@@ -11,7 +12,7 @@ function SkillsCard(props) {
           <div className="card-text">
             Description.
           </div>
-          <button type="button" class="btn btn-primary mt-3">Start {props.skillName}</button>
+          <LinkButton/>
         </div>
       </div >
     </>
