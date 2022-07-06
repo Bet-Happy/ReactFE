@@ -29,15 +29,9 @@ class ProgressCircle extends React.Component {
             <div className='container align-self-center w-50'>
                 <div className="card">
                     <div className="card-header">Activity: {this.props.skillName}</div>
-<<<<<<< HEAD
                     <div className="card-body row align-items-center justify-content-center text-center">
                         <div className ="d-flex" style={{ width: 100, height: 100 }}>
                             <CircularProgressbar value={this.state.value} maxValue={100} text={`${this.state.value}%`} styles={buildStyles({ pathTransition: this.state.value === 0 ? "none" : "stroke-dashoffset 0.01s ease 0s" })} />
-=======
-                    <div className="card-body">
-                        <div style={{ width: 100, height: 100 }}>
-                            <CircularProgressbar value={this.state.value} maxValue={100} text={`${this.state.value}%`} styles={buildStyles({ pathTransition: this.state.value === 0 ? "none" : "stroke-dashoffset 10% ease 0s" })} />
->>>>>>> 8b07b506bdcb1fc47d90e84a403822862867a519
                         </div>
                         <div className="card-title">progress circle</div>
                         <div className="card-text">
