@@ -4,6 +4,8 @@ import 'react-circular-progressbar/dist/styles.css';
 
 class ProgressCircle extends React.Component {
 
+
+
     render() {
         return (
             <div className='container align-self-center w-50'>

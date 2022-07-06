@@ -5,42 +5,34 @@ import SkillsCard from './components/SkillsCard';
 import VerticalNavs from './components/VerticalNavs';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = { value: 0, sec: 5, active: false };
-    // this.startProgress = this.startProgress.bind(this);
-    // this.endProgress = this.endProgress.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = { value: 0, active: false, sec: 5 };
   }
-
 
   startProgress = () => {
     console.log("startProgress");
     console.log(`before state change: ${this.state.active}`);
-    this.setState({ active: true }, () => {
-      console.log(`after state change: ${this.state.active}`);
-      this.counterInterval = setInterval(
-        () => {
-          if (this.state.value >= 100) {
-            console.log(this.state.value)
-            this.setState({ value: 0 });
-          } else {
-            this.setState({ value: this.state.value + 1 })
-          }
-        },
-        10 * (this.state.sec - 0.5)
-      );
 
-    });
-
+    this.counterInterval = setInterval(
+      () => {
+        if (this.state.value >= 100) {
+          console.log(this.state.value)
+          this.setState({ value: 0 });
+        } else {
+          this.setState({ value: this.state.value + 1 })
+        }
+      },
+      10 * (this.state.sec - 0.5)
+    );
   }
 
 
 
   endProgress = () => {
     console.log("endProgress");
-    this.setState({ active: false }, () => {
-      clearInterval(this.counterInterval);
-    })
+    clearInterval(this.counterInterval);
+    this.setState({ value: 0 })
 
   }
 
@@ -57,7 +49,7 @@ class App extends React.Component {
                 <ProgressCircle activeSkill="Mining" value={this.state.value} />
               </div>
               <div className='row d-flex justify-content-around'>
-                <SkillsCard skillName="Mining" startProgress={this.startProgress} endProgress={this.endProgress} active={this.state.active} />
+                <SkillsCard skillName="Mining" startProgress={this.startProgress} endProgress={this.endProgress} />
                 <SkillsCard skillName="Smithing" />
                 <SkillsCard skillName="Woodcutting" />
               </div>
