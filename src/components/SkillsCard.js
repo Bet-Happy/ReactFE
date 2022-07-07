@@ -6,7 +6,7 @@ class SkillsCard extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.props.start)
+    
   }
 
   componentDidUpdate() {
