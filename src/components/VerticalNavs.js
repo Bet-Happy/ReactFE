@@ -10,6 +10,9 @@ function VerticalNavs() {
                 <a className="nav-link text-white text-truncate" href="#">Mining</a>
             </li>
             <li className="nav-item">
+                <a className="nav-link text-white text-truncate" href="#">Smithing</a>
+            </li>
+            <li className="nav-item">
                 <a className="nav-link text-white text-truncate" href="#">Woodcutting</a>
             </li>
         </ul>

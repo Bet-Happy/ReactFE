@@ -8,8 +8,22 @@ import XpBox from './components/XpBox';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: 0, active: false, sec: 5, Xp: 0 };
+    this.state = { value: 0, active: false, sec: 5, Xp: 5 };
   }
+
+  async componentDidMount() {
+    const response = await fetch('http://localhost:8080/character', {
+      method: 'GET',
+      headers: {
+        "Content-Type":"application/json"
+      }
+    });
+    const data = await response.json();
+    this.setState({ Xp: data['data']['mining']})
+    console.log(data['data']['mining'])
+    console.log(data)
+  }
+
   updateXp = () => {
     this.setState({ Xp: this.state.Xp + 1 }) // 1 is a placeholder for the xp from resource table DB
   }
