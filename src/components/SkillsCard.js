@@ -1,16 +1,25 @@
 import React from 'react';
-import LinkButton from './LinkButton';
 
 
 class SkillsCard extends React.Component {
-
-
-  componentDidMount() {
-    
+  constructor(props) {
+    super(props);
+    this.state = { active: false };
   }
 
-  componentDidUpdate() {
+  handleClick = () => {
+
+    if (!this.state.active) {
+      this.props.activeMiningSkill(this.props.skillName);
+      this.props.startProgress();
+      this.setState({ active: true });
+    } else {
+      this.props.activeMiningSkill("none");
+      this.props.endProgress();
+      this.setState({ active: false })
+    }
   }
+
   render() {
     return (
       <>
@@ -21,7 +30,9 @@ class SkillsCard extends React.Component {
             <div className="card-text">
               Description.
             </div>
-            <LinkButton startProgress={this.props.startProgress} endProgress={this.props.endProgress} start={this.props.start} />
+            <div>
+              <button type="button" className="btn btn-primary mt-3" onClick={this.handleClick}>Start</button>
+            </div>
           </div>
         </div >
       </>

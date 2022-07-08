@@ -12,12 +12,12 @@ function Mine(props) {
         <XpBox updateXp={props.xp} />
       </div>
       <div className="row my-5">
-        <ProgressCircle activeSkill="Mining" value={props.value} />
+        <ProgressCircle activeOre={props.activeOre} value={props.value} />
       </div>
       <div className='row d-flex justify-content-around'>
-        <SkillsCard skillName="Copper Ore" startProgress={props.startProgress} endProgress={props.endProgress} />
-        <SkillsCard skillName="Tin Ore" />
-        <SkillsCard skillName="Iron Ore" />
+        <SkillsCard skillName="Copper Ore" activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
+        <SkillsCard skillName="Tin Ore" activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
+        <SkillsCard skillName="Iron Ore" activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
       </div>
     </div>
   );
