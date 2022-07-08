@@ -4,6 +4,9 @@ import ProgressCircle from './components/ProgressCircle';
 import SkillsCard from './components/SkillsCard';
 import VerticalNavs from './components/VerticalNavs';
 import XpBox from './components/XpBox';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Mine from './components/MiningPage';
+import Home from './components/Home';
 
 class App extends React.Component {
   constructor(props) {
@@ -58,16 +61,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App" >
+      <Router>
+        <div className="App">
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-2 col-md-3 col-sm-4 flex-column py-3 px-auto text-white bg-dark">
               <VerticalNavs />
             </div>
-      
             <div className="col-lg-10 col-md-9 col-sm-8">
               <div className='row'>
-                <XpBox updateXp={this.state.Xp}/>
+                <XpBox updateXp={this.state.Xp} />
               </div>
               <div className="row my-5">
                 <ProgressCircle activeSkill="Mining" value={this.state.value} />
@@ -79,8 +82,16 @@ class App extends React.Component {
               </div>
             </div>
           </div>
+          
         </div>
-      </div >
+      </div>
+
+      <Routes>
+        <Route exact path="/" element={<Home/>} />
+        <Route path="/Mine" element={<Mine/>} />
+      </Routes>
+
+     </Router>
     );
   }
 }

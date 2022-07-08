@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+import Mine from './MiningPage';
 
 function VerticalNavs() {
     return (
@@ -6,9 +8,9 @@ function VerticalNavs() {
             <li className="nav-item">
                 <a className="nav-link active text-truncate" aria-current="page" href="#">Dashboard</a>
             </li>
-            <li className="nav-item">
-                <a className="nav-link text-white text-truncate" href="#">Mining</a>
-            </li>
+            <Link to='/Mine'>
+              <li className ="nav-item"> Mining</li>
+            </Link>
             <li className="nav-item">
                 <a className="nav-link text-white text-truncate" href="#">Smithing</a>
             </li>
