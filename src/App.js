@@ -9,7 +9,7 @@ import Home from './views/HomePage';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: 0, active: false, sec: 5, xp: 5 };
+    this.state = { value: 0, active: false, sec: 5, miningXp: 5, activeOre: "none" };
   }
 
   async componentDidMount() {
@@ -26,7 +26,11 @@ class App extends React.Component {
   }
 
   updateXp = () => {
-    this.setState({ xp: this.state.xp + 1 }) // 1 is a placeholder for the xp from resource table DB
+    this.setState({ miningXp: this.state.miningXp + 1 }) // 1 is a placeholder for the xp from resource table DB
+  }
+
+  updateActiveMiningSkill = (oreName) => {
+    this.setState({ activeOre: oreName });
   }
 
   startProgress = () => {
@@ -36,7 +40,7 @@ class App extends React.Component {
         if (this.state.value >= 100) {
 
           //right here is were we update the Xp state in XpBox.js
-          this.updateXp();
+          this.updateXp(resourceXp);
 
           this.setState({ value: 0 });
         } else {
@@ -64,7 +68,7 @@ class App extends React.Component {
             <div className="col-lg-10 col-md-9 col-sm-8">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/Mine" element={<Mine value={this.state.value} xp={this.state.xp} startProgress={this.startProgress} endProgress={this.endProgress} />} />
+                <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.xp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
               </Routes>
             </div>
           </div>
