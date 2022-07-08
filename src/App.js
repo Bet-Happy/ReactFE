@@ -1,34 +1,32 @@
 import React from 'react';
 import './App.css';
-import ProgressCircle from './components/ProgressCircle';
-import SkillsCard from './components/SkillsCard';
+
 import VerticalNavs from './components/VerticalNavs';
-import XpBox from './components/XpBox';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Mine from './components/MiningPage';
-import Home from './components/Home';
+import { Routes, Route } from 'react-router-dom';
+import Mine from './views/MiningPage';
+import Home from './views/HomePage';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: 0, active: false, sec: 5, Xp: 5 };
+    this.state = { value: 0, active: false, sec: 5, xp: 5 };
   }
 
   async componentDidMount() {
     const response = await fetch('http://localhost:8080/character', {
       method: 'GET',
       headers: {
-        "Content-Type":"application/json"
+        "Content-Type": "application/json"
       }
     });
     const data = await response.json();
-    this.setState({ Xp: data['data']['mining']})
+    this.setState({ xp: data['data']['mining'] })
     console.log(data['data']['mining'])
     console.log(data)
   }
 
   updateXp = () => {
-    this.setState({ Xp: this.state.Xp + 1 }) // 1 is a placeholder for the xp from resource table DB
+    this.setState({ xp: this.state.xp + 1 }) // 1 is a placeholder for the xp from resource table DB
   }
 
   startProgress = () => {
@@ -57,41 +55,25 @@ class App extends React.Component {
     this.setState({ value: 0 })
   }
 
-  
+
 
   render() {
     return (
-      <Router>
-        <div className="App">
+      <div className="App">
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-2 col-md-3 col-sm-4 flex-column py-3 px-auto text-white bg-dark">
               <VerticalNavs />
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8">
-              <div className='row'>
-                <XpBox updateXp={this.state.Xp} />
-              </div>
-              <div className="row my-5">
-                <ProgressCircle activeSkill="Mining" value={this.state.value} />
-              </div>
-              <div className='row d-flex justify-content-around'>
-                <SkillsCard skillName="Mining" startProgress={this.startProgress} endProgress={this.endProgress} />
-                <SkillsCard skillName="Smithing" />
-                <SkillsCard skillName="Woodcutting" />
-              </div>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/Mine" element={<Mine value={this.state.value} xp={this.state.xp} startProgress={this.startProgress} endProgress={this.endProgress} />} />
+              </Routes>
             </div>
           </div>
-          
         </div>
       </div>
-
-      <Routes>
-        <Route exact path="/" element={<Home/>} />
-        <Route path="/Mine" element={<Mine/>} />
-      </Routes>
-
-     </Router>
     );
   }
 }
