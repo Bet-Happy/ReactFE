@@ -47,21 +47,17 @@ class App extends React.Component {
     );
   }
 
-
-
   endProgress = () => {
     console.log("endProgress");
     clearInterval(this.counterInterval);
     this.setState({ value: 0 })
   }
 
-
-
   render() {
     return (
       <div className="App">
         <div className="container-fluid">
-          <div className="row">
+          <div className="row homepage">
             <div className="col-lg-2 col-md-3 col-sm-4 flex-column py-3 px-auto text-white bg-dark">
               <VerticalNavs />
             </div>

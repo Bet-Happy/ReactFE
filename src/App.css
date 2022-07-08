@@ -7,6 +7,23 @@
   pointer-events: none;
 }
 
+/* .fill-height {
+  min-height: 100%;
+  height: auto !important;
+  height: 100% ;
+} */
+
+html, body,#root,.App,.homepage {
+  height:100% !important;
+  min-height: 100% !important;
+}
+
+
+.container-fluid {
+  height: 100%;
+  overflow-y: hidden; /* don't show content that exceeds my height */
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

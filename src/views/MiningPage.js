@@ -7,7 +7,7 @@ import SkillsCard from '../components/SkillsCard';
 function Mine(props) {
 
   return (
-    <>
+    <div className="container-fluid">
       <div className='row'>
         <XpBox updateXp={props.xp} />
       </div>
@@ -19,8 +19,8 @@ function Mine(props) {
         <SkillsCard skillName="Smithing" />
         <SkillsCard skillName="Woodcutting" />
       </div>
-    </>
+    </div>
   );
 }
 
-export default Mine
+export default Mine;
