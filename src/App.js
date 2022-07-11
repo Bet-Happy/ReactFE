@@ -40,7 +40,7 @@ class App extends React.Component {
         if (this.state.value >= 100) {
 
           //right here is were we update the Xp state in XpBox.js
-          this.updateXp(resourceXp);
+          this.updateXp();
 
           this.setState({ value: 0 });
         } else {
