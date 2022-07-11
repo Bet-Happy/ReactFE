@@ -5,6 +5,7 @@ import VerticalNavs from './components/VerticalNavs';
 import { Routes, Route } from 'react-router-dom';
 import Mine from './views/MiningPage';
 import Home from './views/HomePage';
+import Inventory from './views/InventoryPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -66,15 +67,16 @@ class App extends React.Component {
             <div className="col-lg-2 col-md-3 col-sm-4 flex-column py-3 px-auto text-white bg-dark">
               <VerticalNavs />
             </div>
-            <div className="col-lg-10 col-md-9 col-sm-8">
+            <div className="col-lg-10 col-md-9 col-sm-8 p-3" >
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.xp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
+                <Route path="/Inventory" element={<Inventory />} />
               </Routes>
             </div>
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
