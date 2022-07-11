@@ -21,7 +21,7 @@ html, body,#root,.App,.homepage {
 
 .container-fluid {
   height: 100%;
-  overflow-y: hidden; /* don't show content that exceeds my height */
+   /* don't show content that exceeds my height */
 }
 
 @media (prefers-reduced-motion: no-preference) {
