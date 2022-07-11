@@ -1,9 +1,13 @@
 import React from 'react';
-import './css/HomePage.css'
+import './css/InventoryPage.css'
 
 class Inventory extends React.Component {
-    componentDidMount() {
+    async componentDidMount() {
         //axio from here
+        const response = await fetch('http://localhost:8080/inventory', {
+            method: 'GET',
+            headers: { "Content-Type": "application/json" }
+        });
     }
 
     render() {

@@ -1,8 +1,9 @@
 .inventory-container {
     display: grid;
-    grid-template-columns: repeat(12, 3.5vw);
+    grid-template-columns: repeat(auto-fill, 3.5vw);
     grid-template-rows: repeat(5, 3.5vw);
     grid-gap: 0px;
     text-align: center;
     background-color: #282a37;
+    width:100%;
   }
