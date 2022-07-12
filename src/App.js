@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('http://localhost:8080/character', {
+    const response = await fetch('http://localhost:8080/characters', {
       method: 'GET',
       headers: {
         "Content-Type": "application/json"
@@ -23,8 +23,8 @@ class App extends React.Component {
     });
     const data = await response.json();
     this.setState({ xp: data['data']['mining'] })
-    console.log(data['data']['mining'])
-    console.log(data)
+    //console.log(data['data']['mining'])
+    //console.log(data)
   }
 
   updateXp = () => {
