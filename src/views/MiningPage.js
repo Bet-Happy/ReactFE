@@ -3,6 +3,7 @@ import '../App.css';
 import XpBox from '../components/XpBox';
 import ProgressCircle from '../components/ProgressCircle';
 import SkillsCard from '../components/SkillsCard';
+import copperOre from '../views/icons/copperOre.png'
 
 function Mine(props) {
 
@@ -15,7 +16,7 @@ function Mine(props) {
         <ProgressCircle activeOre={props.activeOre} value={props.value} />
       </div>
       <div className='mineCards row d-flex justify-content-around'>
-        <SkillsCard className= 'copper' skillTime="5.00s" skillName="Copper Ore" activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
+        <SkillsCard className='copper' skillTime="5.00s" img={copperOre} skillName="Copper Ore" activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
         <SkillsCard skillName="Tin Ore" skillTime="10.00s" activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
         <SkillsCard skillName="Iron Ore" activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
       </div>
