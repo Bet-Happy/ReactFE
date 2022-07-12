@@ -1,0 +1,9 @@
+.inventory-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 8vw);
+    grid-template-rows: repeat(5, 8vw);
+    grid-gap: 0px;
+    text-align: center;
+    background-color: #282a37;
+    width:100%;
+  }

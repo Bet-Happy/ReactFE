@@ -7,6 +7,9 @@ function VerticalNavs() {
             <Link to='/'>
                 <li className="nav-item">Dashboard</li>
             </Link>
+            <Link to='/Inventory'>
+                <li className="nav-item">Inventory</li>
+            </Link>
             <Link to='/Mine'>
                 <li className="nav-item"> Mining</li>
             </Link>
