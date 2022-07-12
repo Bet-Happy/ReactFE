@@ -10,8 +10,9 @@ import Inventory from './views/InventoryPage';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: 0, active: false, sec: 5, miningXp: 5, activeOre: "none" };
-    const oreProperties = {};
+
+    this.state = { id: null, value: 0, active: false, sec: 5, miningXp: 5, activeOre: "nothing" };
+
   }
 
   async componentDidMount() {
@@ -22,29 +23,55 @@ class App extends React.Component {
       }
     });
     const data = await response.json();
-    this.setState({ xp: data['data']['mining'] })
-    //console.log(data['data']['mining'])
-    //console.log(data)
+
+    this.setState({ id: data['data'][0]['id']});
+    this.setState({ miningXp: data['data'][0]['mining'] });
+    
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(this.state['miningXp'] !== prevState.miningXp){
+      this.postXp()
+    }
+    
+
   }
 
-  updateXp = () => {
-    this.setState({ miningXp: this.state.miningXp + 1 }) // 1 is a placeholder for the xp from resource table DB
+  async postXp() {
+    const id = this.state['id']
+    const miningContent = this.state['miningXp']
+    let data = {
+      id: id,
+      mining: miningContent
+    };
+    await fetch('http://localhost:8080/characters/updateExperience', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  }
+
+
+  updateXp = async (e) => {
+    
+   this.setState({ miningXp: this.state.miningXp + 1 }) // 1 is a placeholder for the xp from resource table DB
+
   }
 
   updateActiveMiningSkill = (oreName) => {
     this.setState({ activeOre: oreName });
   }
 
-  startProgress = () => {
+  startProgress = async (e) => {
     console.log("startProgress");
     this.counterInterval = setInterval(
-      () => {
+      async (e) => {
         if (this.state.value >= 100) {
-
-          //right here is were we update the Xp state in XpBox.js
-          this.updateXp();
-
+          
           this.setState({ value: 0 });
+          //right here is were we update the Xp state in XpBox.js
+          await this.updateXp();
         } else {
           this.setState({ value: this.state.value + 1 })
         }
@@ -57,6 +84,7 @@ class App extends React.Component {
     console.log("endProgress");
     clearInterval(this.counterInterval);
     this.setState({ value: 0 })
+    console.log(this.state.miningXp)
   }
 
   render() {
@@ -70,8 +98,10 @@ class App extends React.Component {
             <div className="col-lg-10 col-md-9 col-sm-8 p-3" >
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.xp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
+
+                <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.miningXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
                 <Route path="/Inventory" element={<Inventory />} />
+
               </Routes>
             </div>
           </div>

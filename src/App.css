@@ -30,6 +30,7 @@ html, body,#root,.App,.homepage {
   }
 }
 
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -43,6 +44,19 @@ html, body,#root,.App,.homepage {
 
 .App-link {
   color: #61dafb;
+}
+
+.mine {
+  background: url('https://thumbs.dreamstime.com/b/old-mine-shovel-pick-landscape-vector-illustration-63691407.jpg') no-repeat;
+  background-size: cover;
+  color: white;
+
+}
+
+.mineCards .card {
+  background-color: #343a40;
+  opacity: 0.9;
+
 }
 
 #HomePageSkills {
