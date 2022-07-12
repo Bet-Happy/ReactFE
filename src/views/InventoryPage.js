@@ -39,9 +39,15 @@ class Inventory extends React.Component {
                         <br></br>
                         {item.amount}
                     </div>
-
                 )
             }
+            return (
+                <div className='container-fluid text-white' key={item.id}>
+                    {item.resource}
+                    <br></br>
+                    {item.amount}
+                </div>
+            )
         });
 
 
