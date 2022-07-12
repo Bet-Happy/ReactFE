@@ -14,7 +14,7 @@ class SkillsCard extends React.Component {
       this.props.startProgress();
       this.setState({ active: true });
     } else {
-      this.props.activeMiningSkill("none");
+      this.props.activeMiningSkill("nothing");
       this.props.endProgress();
       this.setState({ active: false })
     }
@@ -23,15 +23,12 @@ class SkillsCard extends React.Component {
   render() {
     return (
       <>
-        <div className="card w-25">
+        <div className="card w-25" onClick={this.handleClick}>
           <div className="card-header">{this.props.skillName}</div>
           <div className="card-body">
             <div className="card-title">Image</div>
             <div className="card-text">
-              Description.
-            </div>
-            <div>
-              <button type="button" className="btn btn-primary mt-3" onClick={this.handleClick}>Start</button>
+              {this.props.skillTime}
             </div>
           </div>
         </div >

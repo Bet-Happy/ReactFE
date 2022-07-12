@@ -9,7 +9,7 @@ import Home from './views/HomePage';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { id: null, value: 0, active: false, sec: 5, miningXp: 5, activeOre: "none" };
+    this.state = { id: null, value: 0, active: false, sec: 5, miningXp: 5, activeOre: "nothing" };
   }
 
   async componentDidMount() {
@@ -23,6 +23,13 @@ class App extends React.Component {
     this.setState({ id: data['data'][0]['id']});
     this.setState({ miningXp: data['data'][0]['mining'] });
     
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(this.state['miningXp'] !== prevState.miningXp){
+      this.postXp()
+    }
+    
+
   }
 
   async postXp() {
@@ -57,15 +64,10 @@ class App extends React.Component {
     this.counterInterval = setInterval(
       async (e) => {
         if (this.state.value >= 100) {
-          //right here is were we update the Xp state in XpBox.js
+          
           this.setState({ value: 0 });
-          console.log(this.state.miningXp)
+          //right here is were we update the Xp state in XpBox.js
           await this.updateXp();
-          // below should only run after updateXp has run, but currently it runs immediatly
-          console.log(this.state.miningXp);
-          await this.postXp();
-          
-          
         } else {
           this.setState({ value: this.state.value + 1 })
         }
