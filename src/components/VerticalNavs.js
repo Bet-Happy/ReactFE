@@ -1,4 +1,5 @@
 import React from 'react';
+import '../App.css';
 import { Link } from 'react-router-dom'
 
 function VerticalNavs() {
@@ -13,12 +14,9 @@ function VerticalNavs() {
             <Link to='/Mine'>
                 <li className="nav-item"> Mining</li>
             </Link>
-            <li className="nav-item">
-                <a className="nav-link text-white text-truncate" href="#">Smithing</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link text-white text-truncate" href="#">Woodcutting</a>
-            </li>
+            <Link to='/Smithing'>
+              <li className="nav-item">Smithing</li>
+            </Link>
         </ul>
     );
 }

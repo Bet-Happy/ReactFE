@@ -26,9 +26,9 @@ class SkillsCard extends React.Component {
         <div className="card w-25" onClick={this.handleClick}>
           <div className="card-header">{this.props.skillName}</div>
           <div className="card-body">
-            <div className="card-title">Image</div>
+            <div className="card-title"><img src={this.props.skillImage} height="40vh" ></img></div>
             <div className="card-text">
-              {this.props.skillTime}
+              
             </div>
           </div>
         </div >

@@ -20,7 +20,7 @@ html, body,#root,.App,.homepage {
 
 
 .container-fluid {
-  height: 100%;
+  
    /* don't show content that exceeds my height */
 }
 
@@ -28,6 +28,10 @@ html, body,#root,.App,.homepage {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+a:link {
+  text-decoration: none;
 }
 
 
@@ -39,18 +43,40 @@ html, body,#root,.App,.homepage {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  
   color: white;
 }
 
 .App-link {
   color: #61dafb;
 }
+.Home {
+  background: url('https://i.pinimg.com/originals/24/64/38/2464389a8bd927044150d01dded99950.jpg') no-repeat ;
+  background-size: cover;
+  color: white;
+  min-height: 600px;
+
+}
+.homeCards .card{
+background-color: #343a40;
+}
+
+.smithing {
+  background: url('./views/icons/blacksmith.jpg') no-repeat;
+  background-size: cover;
+  color: white;
+  min-height: 600px;
+}
+.smithingCards .card {
+  background-color: #343a40;
+  opacity: 0.9;
+}
 
 .mine {
   background: url('https://thumbs.dreamstime.com/b/old-mine-shovel-pick-landscape-vector-illustration-63691407.jpg') no-repeat;
   background-size: cover;
   color: white;
-
+  
 }
 
 .mineCards .card {
