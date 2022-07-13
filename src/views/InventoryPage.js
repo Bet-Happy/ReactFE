@@ -21,6 +21,17 @@ class Inventory extends React.Component {
     render() {
         const { inventory } = this.state;
         const list = inventory.map((item) => {
+            //only display when item.amount > 0
+            if (item.amount > 0) {
+                return (
+                    <div className='container-fluid text-white' key={item.id}>
+                        {item.resource}
+                        <br></br>
+                        {item.amount}
+                    </div>
+                )
+            }
+
             if (item.resource === "Copper") {
                 return (
                     <div className='container-fluid text-white' key={item.id}>
@@ -41,13 +52,7 @@ class Inventory extends React.Component {
                     </div>
                 )
             }
-            return (
-                <div className='container-fluid text-white' key={item.id}>
-                    {item.resource}
-                    <br></br>
-                    {item.amount}
-                </div>
-            )
+
         });
 
 
