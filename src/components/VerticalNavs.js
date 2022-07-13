@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function VerticalNavs() {
     return (
         <ul className="nav nav-pills flex-column m-auto p-auto text-truncate">
-            <Link to='/'>
+            <Link to='/dashboard'>
                 <li className="nav-item">Dashboard</li>
             </Link>
             <Link to='/Inventory'>
