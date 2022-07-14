@@ -7,6 +7,7 @@ class Inventory extends React.Component {
     constructor(props) {
         super(props);
         this.state = { inventory: [] };
+
     }
 
     async componentDidMount() {
@@ -16,21 +17,23 @@ class Inventory extends React.Component {
             headers: { "Content-Type": "application/json" }
         });
         const { data } = await response.json();
+        console.log(data)
         this.setState({ inventory: data });
 
     }
 
     render() {
+        const resource = ["Copper Ore", "Tin Ore", "Bronze", "BronzePickaxe"]
         const { inventory } = this.state;
         const list = inventory.map((item) => {
             //only display when item.amount > 0
             if (item.amount == 0) { return (<></>); }
-            if (item.resource === "Copper" && item.amount >= 1) {
+            if (item.resource == "1" && item.amount >= 1) {
                 return (
                     <div className='container-fluid text-white box' key={item.id}>
                         <img src={copperOre} alt="copper img" />
                         <br></br>
-                        {item.resource}
+                        {resource[0]}
                         <br></br>
                         {/* <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                             <span class="visually-hidden">New alerts</span>
@@ -39,12 +42,12 @@ class Inventory extends React.Component {
                     </div >
                 )
             }
-            if (item.resource === "Tin" && item.amount >= 1) {
+            if (item.resource == "2" && item.amount >= 1) {
                 return (
                     <div className='container-fluid text-white box' key={item.id}>
                         <img src={tinOre} alt="tin img" />
                         <br></br>
-                        {item.resource}
+                        {resource[1]}
                         <br></br>
                         {item.amount}
                     </div>

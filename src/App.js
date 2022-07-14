@@ -27,16 +27,22 @@ class App extends React.Component {
     this.setState({ miningXp: data['data'][0]['mining'] });
     this.setState({ smithingXp: data['data'][0]['smithing'] });
     this.setState({ Inventory: data['data'][0]['inventories'] })
+    console.log(this.state.Inventory)
+
 
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.state['miningXp'] !== prevState.miningXp) {
+    if (this.state.Inventory !== prevState.Inventory) {
+      this.updateInventory();
+    } else if (this.state['miningXp'] !== prevState.miningXp) {
       this.postMineXp();
       this.patchResource();
+
     } else if (this.state['smithingXp'] !== prevState.smithingXp) {
       this.postSmithingXp();
       this.postBronze();
     }
+
   }
 
   async postMineXp() {
@@ -56,6 +62,7 @@ class App extends React.Component {
       },
       body: JSON.stringify(data)
     });
+
   }
 
   async postSmithingXp() {
@@ -98,15 +105,30 @@ class App extends React.Component {
   }
 
   async postBronze() {
-    let resource = this.state.activeSmithing
+    let characters = this.state.id
+
+    let y = String(characters)
+    let data = {
+      characters: y
+    };
     let x = new Map(this.state.Inventory.map(item => {
       return [item.id, item.amount]
     }))
-    //console.log(x.get(1))
+    console.log(`current Copper amount ${x.get(1)}`)
+    console.log(`current Tin amount ${x.get(2)}`)
     if (x.get(1) == 0 || x.get(2) == 0) {
+      this.setState({ smithingXp: this.state.smithingXp - 1 })
       alert('Need Copper and Tin ore to smelt Bronze Bars')
+      this.endProgress();
+
     } else {
-      console.log("making a bronze bar")
+      await fetch('http://localhost:8080/crafting/Bronze', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
     }
   }
 
@@ -117,6 +139,29 @@ class App extends React.Component {
     } else {
       this.setState({ smithingXp: this.state.smithingXp + 1 })
     }
+  }
+
+
+  async updateInventory() {
+    /*let x = new Map(this.state.Inventory.map ( item => {
+      return[item.id, item.amount]
+    }))
+    */
+    console.log(this.state.Inventory)
+    const response = await fetch('http://localhost:8080/inventory', {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await response.json();
+
+    let x = new Map(data['data'].map(item => {
+      return [item.id, item.amount]
+    }))
+    console.log(x.get(1))
+
+
   }
 
   updateActiveMiningSkill = (oreName) => {
@@ -134,8 +179,10 @@ class App extends React.Component {
         if (this.state.value >= 100) {
 
           this.setState({ value: 0 });
+
           //right here is were we update the Xp state in XpBox.js
           await this.updateXp();
+
         } else {
           this.setState({ value: this.state.value + 1 })
         }
