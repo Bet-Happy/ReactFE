@@ -4,6 +4,7 @@ import './App.css';
 import VerticalNavs from './components/VerticalNavs';
 import { Routes, Route } from 'react-router-dom';
 import Mine from './views/MiningPage';
+import Smithing from './views/SmithingPage';
 import Home from './views/HomePage';
 import Inventory from './views/InventoryPage';
 import CreateCharacter from './views/CreateCharacterPage';
@@ -11,9 +12,7 @@ import CreateCharacter from './views/CreateCharacterPage';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { id: null, value: 0, active: false, sec: 5, miningXp: 5, activeOre: "nothing" };
-
+    this.state = { id: null, value: 0, active: false, sec: 5, miningXp: 0, smithingXp: 0, activeOre: "nothing", activeSmithing: "nothing" };
   }
 
   async componentDidMount() {
@@ -25,24 +24,32 @@ class App extends React.Component {
     });
     const data = await response.json();
 
-    this.setState({ id: data['data'][0]['id'] });
+    this.setState({ id: data['data'][0]['id'] })
     this.setState({ miningXp: data['data'][0]['mining'] });
+    this.setState({ smithingXp: data['data'][0]['smithing'] });
 
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.state['miningXp'] !== prevState.miningXp) {
-      this.postXp()
+      this.postMineXp();
+      console.log(this.state.activeOre)
+      this.patchResource();
+      console.log(this.state.activeOre)
+      console.log("Tried to patch to inventory")
+    } else if (this.state['smithingXp'] !== prevState.smithingXp) {
+      this.postSmithingXp();
     }
-
-
   }
 
-  async postXp() {
+  async postMineXp() {
     const id = this.state['id']
     const miningContent = this.state['miningXp']
+
+
     let data = {
       id: id,
-      mining: miningContent
+      mining: miningContent,
+
     };
     await fetch('http://localhost:8080/characters/updateExperience', {
       method: 'POST',
@@ -53,15 +60,62 @@ class App extends React.Component {
     });
   }
 
+  async postSmithingXp() {
+    const id = this.state['id']
+    const smithingContent = this.state['smithingXp']
+
+    let data = {
+      id: id,
+      smithing: smithingContent,
+    };
+    await fetch('http://localhost:8080/characters/updateExperience', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  }
+
+  async patchResource() {
+    let resource = this.state.activeOre
+    let amount = 1;
+    if (resource === 'Copper Ore') {
+      resource = 1
+    }
+
+    let data = {
+      resource: resource,
+      amount: amount
+    };
+    await fetch('http://localhost:8080/inventory', {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  }
+
 
   updateXp = async (e) => {
+    if (this.state.activeOre != 'nothing') {
+      this.setState({ miningXp: this.state.miningXp + 1 }) // 1 is a placeholder for the xp from resource table DB
+    } else {
+      this.setState({ smithingXp: this.state.smithingXp + 1 })
+    }
 
-    this.setState({ miningXp: this.state.miningXp + 1 }) // 1 is a placeholder for the xp from resource table DB
+
+
 
   }
 
   updateActiveMiningSkill = (oreName) => {
     this.setState({ activeOre: oreName });
+  }
+
+  updateActiveSmithingSkill = (smithName) => {
+    this.setState({ activeSmithing: smithName });
   }
 
   startProgress = async (e) => {
@@ -85,7 +139,6 @@ class App extends React.Component {
     console.log("endProgress");
     clearInterval(this.counterInterval);
     this.setState({ value: 0 })
-    console.log(this.state.miningXp)
   }
 
   render() {
@@ -96,12 +149,11 @@ class App extends React.Component {
             <div className="col-lg-2 col-md-3 col-sm-4 flex-column py-3 px-auto text-white bg-dark">
               <VerticalNavs />
             </div>
-            <div className="col-lg-10 col-md-9 col-sm-8 p-3" >
+            <div className="col-lg-10 col-md-9 col-sm-8 py-0 px-0" >
               <Routes>
-                <Route path="/" element={<CreateCharacter />} />
-                <Route path="/Dashboard" element={<Home />} />
-
+                <Route path="/" element={<Home />} />
                 <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.miningXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
+                <Route path="/Smithing" element={<Smithing activeOre={this.state.activeSmithing} value={this.state.value} xp={this.state.smithingXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveSmithingSkill} />} />
                 <Route path="/Inventory" element={<Inventory />} />
 
               </Routes>

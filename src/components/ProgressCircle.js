@@ -10,7 +10,7 @@ class ProgressCircle extends React.Component {
         return (
             <div className='container align-self-center w-50'>
                 <div className="card">
-                    <div className="card-header">Currently Mining: {this.props.activeOre}</div>
+                    <div className="card-header">Currently {this.props.activeSkill} {this.props.activeOre}</div>
                     <div className="card-body row align-items-center justify-content-center text-center">
                         <div style={{ width: 200, height: 200, paddingTop: 12}}>
                             <CircularProgressbar value={this.props.value} maxValue={100} styles ={{

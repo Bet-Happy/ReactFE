@@ -3,13 +3,13 @@ import '../App.css';
 
 function Home() {
   return (
-    <div>
+    <div className="Home">
       <h1>Home Page</h1>
       <h2>Character Name Placeholder</h2>
      
-      <div className='container align-self-center w-75' >
+      <div className='container align-self-center w-75 homeCards' >
         <div className="card">
-          <div className='card-header'>Skills</div>
+          <div className='card-header homeCards'>Skills</div>
           <div className='card-body row'>
             <div id='HomePageSkills'>
               <div>
