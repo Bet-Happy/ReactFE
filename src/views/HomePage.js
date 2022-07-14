@@ -5,7 +5,7 @@ function Home() {
   return (
     <div className="Home">
       <h1>Home Page</h1>
-      <h2>Character Name Placeholder</h2>
+      <h2></h2>
      
       <div className='container align-self-center w-75 homeCards' >
         <div className="card">

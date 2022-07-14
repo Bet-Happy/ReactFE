@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-
 import VerticalNavs from './components/VerticalNavs';
 import { Routes, Route } from 'react-router-dom';
 import Mine from './views/MiningPage';
@@ -12,7 +11,7 @@ import CreateCharacter from './views/CreateCharacterPage';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { id: null, value: 0, active: false, sec: 5, miningXp: 0, smithingXp: 0, activeOre: "nothing", activeSmithing: "nothing" };
+    this.state = { id: null, value: 0, active: false, sec: 5, miningXp: 0, smithingXp: 0, activeOre: "nothing", activeSmithing: "nothing", Inventory: {} };
   }
 
   async componentDidMount() {
@@ -27,6 +26,7 @@ class App extends React.Component {
     this.setState({ id: data['data'][0]['id'] })
     this.setState({ miningXp: data['data'][0]['mining'] });
     this.setState({ smithingXp: data['data'][0]['smithing'] });
+    this.setState({Inventory: data['data'][0]['inventories']})
 
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -34,8 +34,8 @@ class App extends React.Component {
       this.postMineXp();
       this.patchResource();
     } else if(this.state['smithingXp'] !== prevState.smithingXp){
-
       this.postSmithingXp();
+      this.postBronze();
     }
   }
 
@@ -95,6 +95,19 @@ class App extends React.Component {
       },
       body: JSON.stringify(data)
     });
+  }
+
+  async postBronze() {
+    let resource = this.state.activeSmithing
+    let x = new Map(this.state.Inventory.map( item => {
+      return[item.id, item.amount]
+    }))
+    //console.log(x.get(1))
+    if(x.get(1) == 0 || x.get(2) == 0){
+      alert('Need Copper and Tin ore to smelt Bronze Bars')
+    } else {
+      console.log("making a bronze bar")
+    }
   }
 
 

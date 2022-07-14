@@ -27,12 +27,9 @@ class SkillsCard extends React.Component {
           <div className="card-header">{this.props.skillName}</div>
           <div className="card-body">
             <div className="card-title">
-              <img src={this.props.img} className="round pb-1 px-1" alt="stopwatch img" />
+              <img src={this.props.skillImage} height='40vh' className="round pb-1 px-1" />
             </div>
-            <div className="card-text">
-              <img src={require("../views/icons/stopwatch.png")} className="round pb-1 px-1" alt="stopwatch img" height="20vh" />
-              {this.props.skillTime}
-            </div>
+            
           </div>
         </div >
       </>
