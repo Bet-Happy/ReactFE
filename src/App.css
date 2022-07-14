@@ -89,6 +89,19 @@ a:focus {
   color: white;
 }
 
+.login {
+  align-self: auto;
+  background: url('./views/icons/cartoonarch.jpg') no-repeat;
+  background-size: cover;
+  color: white;
+  min-height: 100vh;
+}
+​
+.login-form{
+  padding-top: 100px !important;
+  margin: auto;
+  max-width: 50% !important;
+}
 
 .Home {
   background: url('https://i.pinimg.com/originals/24/64/38/2464389a8bd927044150d01dded99950.jpg') no-repeat ;
@@ -130,6 +143,7 @@ background-color: #343a40;
   justify-content: space-around;
   
 }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

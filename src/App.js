@@ -6,7 +6,7 @@ import Mine from './views/MiningPage';
 import Smithing from './views/SmithingPage';
 import Home from './views/HomePage';
 import Inventory from './views/InventoryPage';
-import CreateCharacter from './views/CreateCharacterPage';
+import Login from './views/LoginPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -209,6 +209,7 @@ class App extends React.Component {
             <div className="col-lg-10 col-md-9 col-sm-8 py-0 px-0" >
               <Routes>
                 <Route path="/" element={<Home xp={xp} />} />
+                <Route path="/Login" element={<Login />} />
                 <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.miningXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
                 <Route path="/Smithing" element={<Smithing activeOre={this.state.activeSmithing} value={this.state.value} xp={this.state.smithingXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveSmithingSkill} />} />
                 <Route path="/Inventory" element={<Inventory />} />
