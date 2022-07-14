@@ -2,12 +2,21 @@ import React from "react";
 
 function CreateCharacter() {
     return (
-        <div>
-            <h1>Character Creation</h1>
-            <h2>Character Name</h2>
-            <button>Create my character</button>
-        </div>
+        <>
+            <div className="container">
+                <form className="m-5">
+                    <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label">Character Name</label>
+                        <input type="text" className="form-control" id="character_name" aria-describedby="character_name" name="name" />
+                        <div id="characterCreationHelp" className="form-text">The one and only....</div>
+                    </div>
+                    <button type="submit" className="btn btn-primary">Create Character</button>
+                </form>
+            </div>
+            <div className="container">
 
+            </div>
+        </>
     )
 }
 

@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import Mine from './views/MiningPage';
 import Home from './views/HomePage';
 import Inventory from './views/InventoryPage';
+import CreateCharacter from './views/CreateCharacterPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,15 +25,15 @@ class App extends React.Component {
     });
     const data = await response.json();
 
-    this.setState({ id: data['data'][0]['id']});
+    this.setState({ id: data['data'][0]['id'] });
     this.setState({ miningXp: data['data'][0]['mining'] });
-    
+
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if(this.state['miningXp'] !== prevState.miningXp){
+    if (this.state['miningXp'] !== prevState.miningXp) {
       this.postXp()
     }
-    
+
 
   }
 
@@ -54,8 +55,8 @@ class App extends React.Component {
 
 
   updateXp = async (e) => {
-    
-   this.setState({ miningXp: this.state.miningXp + 1 }) // 1 is a placeholder for the xp from resource table DB
+
+    this.setState({ miningXp: this.state.miningXp + 1 }) // 1 is a placeholder for the xp from resource table DB
 
   }
 
@@ -68,7 +69,7 @@ class App extends React.Component {
     this.counterInterval = setInterval(
       async (e) => {
         if (this.state.value >= 100) {
-          
+
           this.setState({ value: 0 });
           //right here is were we update the Xp state in XpBox.js
           await this.updateXp();
@@ -97,7 +98,8 @@ class App extends React.Component {
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8 p-3" >
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<CreateCharacter />} />
+                <Route path="/Dashboard" element={<Home />} />
 
                 <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.miningXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
                 <Route path="/Inventory" element={<Inventory />} />
