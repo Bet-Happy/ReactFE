@@ -94,7 +94,7 @@ a:focus {
   background: url('https://i.pinimg.com/originals/24/64/38/2464389a8bd927044150d01dded99950.jpg') no-repeat ;
   background-size: cover;
   color: white;
-  min-height: 600px;
+  min-height: 100vh;
 
 }
 .homeCards .card{

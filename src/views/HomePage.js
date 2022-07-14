@@ -1,25 +1,26 @@
 import React from "react";
 import '../App.css';
 
-function Home() {
+function Home(props) {
+  const { miningXp, smithingXp } = props.xp;
   return (
     <div className="Home">
       <h1>Home Page</h1>
       <h2></h2>
-     
+
       <div className='container align-self-center w-75 homeCards' >
         <div className="card">
           <div className='card-header homeCards'>Skills</div>
           <div className='card-body row'>
             <div id='HomePageSkills'>
               <div>
-              Mining (0/99)
+                Mining ({Math.round(miningXp / 10)}/99)
               </div>
               <div>
-              Smithing (0/99)
+                Smithing ({Math.round(smithingXp / 10)}/99)
               </div>
-              
-              
+
+
             </div>
           </div>
 

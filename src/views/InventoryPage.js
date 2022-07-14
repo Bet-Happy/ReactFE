@@ -1,5 +1,7 @@
 import React from 'react';
 import './css/InventoryPage.css'
+import copperOre from '../views/icons/copperOre.png';
+import tinOre from '../views/icons/tinOre.png';
 
 class Inventory extends React.Component {
     constructor(props) {
@@ -26,7 +28,7 @@ class Inventory extends React.Component {
             if (item.resource === "Copper" && item.amount >= 1) {
                 return (
                     <div className='container-fluid text-white box' key={item.id}>
-                        <img src={require("./icons/copperOre.png")} className="img-thumbnail" alt="copper img" />
+                        <img src={copperOre} alt="copper img" />
                         <br></br>
                         {item.resource}
                         <br></br>
@@ -40,7 +42,7 @@ class Inventory extends React.Component {
             if (item.resource === "Tin" && item.amount >= 1) {
                 return (
                     <div className='container-fluid text-white box' key={item.id}>
-                        <img src={require("./icons/tinOre.png")} className="img-thumbnail" alt="tin img" />
+                        <img src={tinOre} alt="tin img" />
                         <br></br>
                         {item.resource}
                         <br></br>

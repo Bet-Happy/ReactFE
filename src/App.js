@@ -26,14 +26,14 @@ class App extends React.Component {
     this.setState({ id: data['data'][0]['id'] })
     this.setState({ miningXp: data['data'][0]['mining'] });
     this.setState({ smithingXp: data['data'][0]['smithing'] });
-    this.setState({Inventory: data['data'][0]['inventories']})
+    this.setState({ Inventory: data['data'][0]['inventories'] })
 
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.state['miningXp'] !== prevState.miningXp) {
       this.postMineXp();
       this.patchResource();
-    } else if(this.state['smithingXp'] !== prevState.smithingXp){
+    } else if (this.state['smithingXp'] !== prevState.smithingXp) {
       this.postSmithingXp();
       this.postBronze();
     }
@@ -80,7 +80,7 @@ class App extends React.Component {
     let amount = 1;
     if (resource === 'Copper Ore') {
       resource = 1
-    } else if( resource = 'Tin Ore'){
+    } else if (resource = 'Tin Ore') {
       resource = 2
     }
 
@@ -99,11 +99,11 @@ class App extends React.Component {
 
   async postBronze() {
     let resource = this.state.activeSmithing
-    let x = new Map(this.state.Inventory.map( item => {
-      return[item.id, item.amount]
+    let x = new Map(this.state.Inventory.map(item => {
+      return [item.id, item.amount]
     }))
     //console.log(x.get(1))
-    if(x.get(1) == 0 || x.get(2) == 0){
+    if (x.get(1) == 0 || x.get(2) == 0) {
       alert('Need Copper and Tin ore to smelt Bronze Bars')
     } else {
       console.log("making a bronze bar")
@@ -117,10 +117,6 @@ class App extends React.Component {
     } else {
       this.setState({ smithingXp: this.state.smithingXp + 1 })
     }
-
-
-
-
   }
 
   updateActiveMiningSkill = (oreName) => {
@@ -155,6 +151,7 @@ class App extends React.Component {
   }
 
   render() {
+    const xp = { miningXp: this.state.miningXp, smithingXp: this.state.smithingXp }
     return (
       <div className="App">
         <div className="container-fluid">
@@ -164,11 +161,10 @@ class App extends React.Component {
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8 py-0 px-0" >
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home xp={xp} />} />
                 <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.miningXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
                 <Route path="/Smithing" element={<Smithing activeOre={this.state.activeSmithing} value={this.state.value} xp={this.state.smithingXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveSmithingSkill} />} />
                 <Route path="/Inventory" element={<Inventory />} />
-
               </Routes>
             </div>
           </div>
