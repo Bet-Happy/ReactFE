@@ -27,7 +27,7 @@ class App extends React.Component {
     this.setState({ miningXp: data['data'][0]['mining'] });
     this.setState({ smithingXp: data['data'][0]['smithing'] });
     this.setState({ Inventory: data['data'][0]['inventories'] })
-    console.log(this.state.Inventory)
+  
 
 
   }
@@ -111,15 +111,16 @@ class App extends React.Component {
     let data = {
       characters: y
     };
+    console.log(this.state.Inventory)
     let x = new Map(this.state.Inventory.map(item => {
       return [item.id, item.amount]
     }))
     console.log(`current Copper amount ${x.get(1)}`)
     console.log(`current Tin amount ${x.get(2)}`)
     if (x.get(1) == 0 || x.get(2) == 0) {
-      this.setState({ smithingXp: this.state.smithingXp - 1 })
-      alert('Need Copper and Tin ore to smelt Bronze Bars')
+      alert("You need Copper ore and Tin to smelt bronze!")
       this.endProgress();
+
 
     } else {
       await fetch('http://localhost:8080/crafting/Bronze', {
@@ -147,7 +148,7 @@ class App extends React.Component {
       return[item.id, item.amount]
     }))
     */
-    console.log(this.state.Inventory)
+    
     const response = await fetch('http://localhost:8080/inventory', {
       method: 'GET',
       headers: {
@@ -159,7 +160,8 @@ class App extends React.Component {
     let x = new Map(data['data'].map(item => {
       return [item.id, item.amount]
     }))
-    console.log(x.get(1))
+    this.setState({ Inventory: data['data'][0]['inventories'] })
+    
 
 
   }
