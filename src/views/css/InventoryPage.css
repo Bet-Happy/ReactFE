@@ -1,9 +1,21 @@
-.inventory-container {
+.inventory-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 8vw);
     grid-template-rows: repeat(5, 8vw);
-    grid-gap: 0px;
+    grid-gap: 10px;
     text-align: center;
-    background-color: #282a37;
     width:100%;
+    min-height: 100%;
+    background-color:rgba(255, 255, 255, .2);
+    border:1px solid rgba(255, 255, 255, .2);
+    border-radius: 15px;
+  }
+
+  .inventory{
+    background: url('../icons/sr-bg.jpg') no-repeat;
+    background-size:cover;
+  }
+
+  img{
+    max-height: 8vh;
   }
