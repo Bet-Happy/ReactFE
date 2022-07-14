@@ -31,10 +31,7 @@ class App extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if(this.state['miningXp'] !== prevState.miningXp){
       this.postMineXp();
-      console.log(this.state.activeOre)
       this.patchResource();
-      console.log(this.state.activeOre)
-      console.log("Tried to patch to inventory")
     } else if(this.state['smithingXp'] !== prevState.smithingXp){
       this.postSmithingXp();
     }
@@ -81,6 +78,8 @@ class App extends React.Component {
     let amount = 1;
     if(resource === 'Copper Ore'){
       resource = 1
+    } else if( resource = 'Tin Ore'){
+      resource = 2
     }
 
     let data = {

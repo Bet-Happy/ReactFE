@@ -13,25 +13,67 @@
   height: 100% ;
 } */
 
+.container-fluid {
+  min-height: 100%;
+  height: 100%;
+}
+
 html, body,#root,.App,.homepage {
   height:100% !important;
   min-height: 100% !important;
 }
 
-
-.container-fluid {
+.nav {
+  justify-items: baseline;
   
-   /* don't show content that exceeds my height */
+  
 }
-
+.nav-item-1 {
+  padding: 20px;
+  
+}
+.nav-item-2 {
+  padding: 20px;
+  
+}
+.nav-item-3 {
+  padding: 20px;
+  
+}
+.nav-item-4 {
+  padding: 20px;
+  
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
+
 a:link {
   text-decoration: none;
+  color:inherit;
+}
+
+a:visited {
+  color: wheat;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #343a40;
+  text-decoration: none !important;
+  color: wheat !important;
+}
+
+a:active {
+  color: wheat;
+}
+
+a:focus {
+  text-decoration: none;
+  color: wheat;
 }
 
 
@@ -47,9 +89,7 @@ a:link {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
+
 .Home {
   background: url('https://i.pinimg.com/originals/24/64/38/2464389a8bd927044150d01dded99950.jpg') no-repeat ;
   background-size: cover;

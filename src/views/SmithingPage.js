@@ -3,6 +3,7 @@ import '../App.css';
 import XpBox from '../components/XpBox';
 import ProgressCircle from '../components/ProgressCircle';
 import SkillsCard from '../components/SkillsCard';
+import bronzePickaxe from '../views/icons/pickaxe.png';
 
 function Smithing(props) {
 
@@ -15,8 +16,8 @@ function Smithing(props) {
         <ProgressCircle activeOre={props.activeOre} value={props.value} activeSkill="Smithing:" />
       </div>
       <div className='smithingCards row d-flex justify-content-around'>
-        <SkillsCard skillName="Bronze Bar" skillTime="10.00s"  activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
-        <SkillsCard skillName="Bronze Pickaxe" skillTime="15.00s"  activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
+        <SkillsCard skillName=" Smelt Bronze Bar" skillTime="10.00s"  activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
+        <SkillsCard skillName=" Create Bronze Pickaxe" skillTime="15.00s" skillImage={bronzePickaxe}   activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
       </div>
     </div>
   );
