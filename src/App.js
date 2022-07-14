@@ -7,6 +7,7 @@ import Mine from './views/MiningPage';
 import Smithing from './views/SmithingPage';
 import Home from './views/HomePage';
 import Inventory from './views/InventoryPage';
+import CreateCharacter from './views/CreateCharacterPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,17 +23,18 @@ class App extends React.Component {
       }
     });
     const data = await response.json();
-    
-    this.setState({ id: data['data'][0]['id']})
+
+    this.setState({ id: data['data'][0]['id'] })
     this.setState({ miningXp: data['data'][0]['mining'] });
-    this.setState({ smithingXp: data['data'][0]['smithing']});
-    
+    this.setState({ smithingXp: data['data'][0]['smithing'] });
+
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if(this.state['miningXp'] !== prevState.miningXp){
+    if (this.state['miningXp'] !== prevState.miningXp) {
       this.postMineXp();
       this.patchResource();
     } else if(this.state['smithingXp'] !== prevState.smithingXp){
+
       this.postSmithingXp();
     }
   }
@@ -40,12 +42,12 @@ class App extends React.Component {
   async postMineXp() {
     const id = this.state['id']
     const miningContent = this.state['miningXp']
-    
-    
+
+
     let data = {
       id: id,
       mining: miningContent,
-      
+
     };
     await fetch('http://localhost:8080/characters/updateExperience', {
       method: 'POST',
@@ -76,7 +78,7 @@ class App extends React.Component {
   async patchResource() {
     let resource = this.state.activeOre
     let amount = 1;
-    if(resource === 'Copper Ore'){
+    if (resource === 'Copper Ore') {
       resource = 1
     } else if( resource = 'Tin Ore'){
       resource = 2
@@ -97,14 +99,14 @@ class App extends React.Component {
 
 
   updateXp = async (e) => {
-    if(this.state.activeOre != 'nothing'){
+    if (this.state.activeOre != 'nothing') {
       this.setState({ miningXp: this.state.miningXp + 1 }) // 1 is a placeholder for the xp from resource table DB
     } else {
       this.setState({ smithingXp: this.state.smithingXp + 1 })
     }
-    
-   
-   
+
+
+
 
   }
 
@@ -113,7 +115,7 @@ class App extends React.Component {
   }
 
   updateActiveSmithingSkill = (smithName) => {
-    this.setState({ activeSmithing: smithName});
+    this.setState({ activeSmithing: smithName });
   }
 
   startProgress = async (e) => {
@@ -121,7 +123,7 @@ class App extends React.Component {
     this.counterInterval = setInterval(
       async (e) => {
         if (this.state.value >= 100) {
-          
+
           this.setState({ value: 0 });
           //right here is were we update the Xp state in XpBox.js
           await this.updateXp();

@@ -7,6 +7,7 @@ function VerticalNavs() {
         <ul className="nav nav-pills flex-column m-auto p-auto text-truncate">
             <Link to='/' style ={{textDecoration: 'none'}}>
                 <li className="nav-item-1">Home</li>
+
             </Link>
             <Link to='/Inventory'>
                 <li className="nav-item-2">Inventory</li>
