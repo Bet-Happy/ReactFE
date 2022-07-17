@@ -17,9 +17,8 @@ function Mine(props) {
         <ProgressCircle activeOre={props.activeOre} value={props.value} activeSkill="Mining:" />
       </div>
       <div className='mineCards row d-flex justify-content-around'>
-        <SkillsCard skillName="Copper Ore" skillTime="5.00s" skillImage={copperOre} activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
-        <SkillsCard skillName="Tin Ore" skillTime="10.00s" skillImage={tinOre} activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
-        <SkillsCard skillName="Iron Ore" skillTime="15.00s" skillImage="" activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} />
+        <SkillsCard skillName="Copper Ore" skillTime="5.00s" skillImage={copperOre} activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} hardcode={true} />
+        <SkillsCard skillName="Tin Ore" skillTime="10.00s" skillImage={tinOre} activeMiningSkill={props.activeMiningSkill} startProgress={props.startProgress} endProgress={props.endProgress} hardcode={true}/>
       </div>
     </div>
   );

@@ -5,8 +5,8 @@ function Home(props) {
   const { miningXp, smithingXp } = props.xp;
   return (
     <div className="Home">
-      <h1>Home Page</h1>
-      <h2></h2>
+      <h1>Home</h1>
+      <h2>BetHappy</h2>
 
       <div className='container align-self-center w-75 homeCards' >
         <div className="card">
@@ -19,11 +19,15 @@ function Home(props) {
               <div>
                 Smithing ({Math.round(smithingXp / 10)}/99)
               </div>
+              
 
 
             </div>
+            
           </div>
-
+          <div>
+                Extra skills coming in the next release patch!
+              </div>
         </div>
 
       </div>

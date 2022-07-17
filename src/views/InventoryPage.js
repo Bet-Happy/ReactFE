@@ -2,6 +2,7 @@ import React from 'react';
 import './css/InventoryPage.css'
 import copperOre from '../views/icons/copperOre.png';
 import tinOre from '../views/icons/tinOre.png';
+import bronzeBar from '../views/icons/gold-ingot.png';
 
 class Inventory extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class Inventory extends React.Component {
             headers: { "Content-Type": "application/json" }
         });
         const { data } = await response.json();
-        console.log(data)
+        
         this.setState({ inventory: data });
 
     }
@@ -53,6 +54,18 @@ class Inventory extends React.Component {
                     </div>
                 )
             }
+
+            if (item.resource == "3" && item.amount >= 1) {
+              return (
+                  <div className='container-fluid text-white box' key={item.id}>
+                      <img src={bronzeBar} alt="tin img" />
+                      <br></br>
+                      {resource[2]}
+                      <br></br>
+                      {item.amount}
+                  </div>
+              )
+          }
 
         });
         return (

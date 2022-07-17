@@ -7,6 +7,7 @@ import Smithing from './views/SmithingPage';
 import Home from './views/HomePage';
 import Inventory from './views/InventoryPage';
 import Login from './views/LoginPage';
+import toast, {Toaster} from 'react-hot-toast';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,10 +24,10 @@ class App extends React.Component {
     });
     const data = await response.json();
 
-    this.setState({ id: data['data'][0]['id'] })
+    this.setState({ id: data['data'][0]['id'] });
     this.setState({ miningXp: data['data'][0]['mining'] });
     this.setState({ smithingXp: data['data'][0]['smithing'] });
-    this.setState({ Inventory: data['data'][0]['inventories'] })
+    this.setState({ Inventory: data['data'][0]['inventories'] });
   
 
 
@@ -111,18 +112,7 @@ class App extends React.Component {
     let data = {
       characters: y
     };
-    console.log(this.state.Inventory)
-    let x = new Map(this.state.Inventory.map(item => {
-      return [item.id, item.amount]
-    }))
-    console.log(`current Copper amount ${x.get(1)}`)
-    console.log(`current Tin amount ${x.get(2)}`)
-    if (x.get(1) == 0 || x.get(2) == 0) {
-      alert("You need Copper ore and Tin to smelt bronze!")
-      this.endProgress();
-
-
-    } else {
+    
       await fetch('http://localhost:8080/crafting/Bronze', {
         method: 'POST',
         headers: {
@@ -131,7 +121,7 @@ class App extends React.Component {
         body: JSON.stringify(data)
       });
     }
-  }
+  
 
 
   updateXp = async (e) => {
@@ -161,9 +151,6 @@ class App extends React.Component {
       return [item.id, item.amount]
     }))
     this.setState({ Inventory: data['data'][0]['inventories'] })
-    
-
-
   }
 
   updateActiveMiningSkill = (oreName) => {
@@ -184,6 +171,20 @@ class App extends React.Component {
 
           //right here is were we update the Xp state in XpBox.js
           await this.updateXp();
+          console.log(this.state.activeOre)
+          console.log(this.state.activeSmithing)
+          if(this.state.activeOre != 'nothing'){
+            const notify = () => toast(`+1 ${this.state.activeOre}`, {
+              position: "top-right"
+            });
+            notify()
+          } else {
+            const notify = () => toast(`+1 ${this.state.activeSmithing}`, {
+              position: "top-right"
+            });
+            notify()
+          }
+          
 
         } else {
           this.setState({ value: this.state.value + 1 })
@@ -205,15 +206,17 @@ class App extends React.Component {
       <div className="App">
         <div className="container-fluid">
           <div className="row homepage">
+          <Routes>
+            <Route path="/Login" element={<Login />} />
+          </Routes>
             <div className="col-lg-2 col-md-3 col-sm-4 flex-column py-3 px-auto text-white bg-dark">
               <VerticalNavs />
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8 py-0 px-0" >
               <Routes>
                 <Route path="/" element={<Home xp={xp} />} />
-                <Route path="/Login" element={<Login />} />
                 <Route path="/Mine" element={<Mine activeOre={this.state.activeOre} value={this.state.value} xp={this.state.miningXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveMiningSkill} />} />
-                <Route path="/Smithing" element={<Smithing activeOre={this.state.activeSmithing} value={this.state.value} xp={this.state.smithingXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveSmithingSkill} />} />
+                <Route path="/Smithing" element={<Smithing activeOre={this.state.activeSmithing} value={this.state.value} xp={this.state.smithingXp} startProgress={this.startProgress} endProgress={this.endProgress} activeMiningSkill={this.updateActiveSmithingSkill} inventory={this.state.Inventory} hardcode={false} />} />
                 <Route path="/Inventory" element={<Inventory />} />
               </Routes>
             </div>

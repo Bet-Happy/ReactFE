@@ -95,9 +95,16 @@ a:focus {
   background-size: cover;
   color: white;
   min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex
 }
 ​
+.skillImage {
+  background: salmon;
+}
 .login-form{
+ 
   padding-top: 100px !important;
   margin: auto;
   max-width: 50% !important;
